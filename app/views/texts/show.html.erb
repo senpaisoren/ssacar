@@ -1,9 +1,22 @@
-<div class="page-header">
- <h1><%= @text.title %></a><br> <small>Submitted by <%= @text.user.email %></small></h1>
+<div class="centered">
+ <h1><%= @text.title %></a><br> <small>Submitted by <%= @text.user.name %></small></h1>
 </div>
-<% if @text.user == current_user %>
+<% if @text.user && current_user == current_user %>
  <div class="btn-group">
   <%= link_to 'Edit', edit_text_path(@text), class: "btn btn-default" %>
   <%= link_to 'Destroy', @text, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
  </div>
 <% end %>
+
+<div class="btn-group pull-right">
+ <%= link_to like_text_path(@text), method: :put, class: "btn btn-default btn-sm" do %>
+  <span class="glyphicon glyphicon-chevron-up"></span>
+  Upvote
+  <%= @text.get_upvotes.size %>
+ <% end %>
+ <%= link_to dislike_text_path(@text), method: :put, class: "btn btn-default btn-sm" do %>
+  <span class="glyphicon glyphicon-chevron-down"></span>
+  Downvote
+  <%= @text.get_downvotes.size %>
+ <% end %>
+</div>

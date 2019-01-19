@@ -22,6 +22,20 @@ class TextsController < ApplicationController
   def edit
   end
 
+  #UPVOTE
+  def upvote
+    @text = Text.find(params[:id])
+    @text.upvote_by current_user
+    redirect_back fallback_location: root_path
+  end
+
+  #DOWNVOTE
+  def downvote
+    @text = Text.find(params[:id])
+    @text.downvote_by current_user
+    redirect_back fallback_location: root_path
+  end
+
   # POST /texts
   # POST /texts.json
   def create
