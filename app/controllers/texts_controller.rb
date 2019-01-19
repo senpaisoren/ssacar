@@ -1,5 +1,6 @@
 class TextsController < ApplicationController
   before_action :set_text, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /texts
   # GET /texts.json
@@ -14,7 +15,7 @@ class TextsController < ApplicationController
 
   # GET /texts/new
   def new
-    @text = Text.new
+    @text = current_user.texts.build
   end
 
   # GET /texts/1/edit
@@ -24,11 +25,11 @@ class TextsController < ApplicationController
   # POST /texts
   # POST /texts.json
   def create
-    @text = Text.new(text_params)
+    @text = current_user.texts.build(text_params)
 
     respond_to do |format|
       if @text.save
-        format.html { redirect_to @text, notice: 'Text was successfully created.' }
+        format.html { redirect_to @text, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @text }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class TextsController < ApplicationController
   def update
     respond_to do |format|
       if @text.update(text_params)
-        format.html { redirect_to @text, notice: 'Text was successfully updated.' }
+        format.html { redirect_to @text, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @text }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class TextsController < ApplicationController
   def destroy
     @text.destroy
     respond_to do |format|
-      format.html { redirect_to texts_url, notice: 'Text was successfully destroyed.' }
+      format.html { redirect_to texts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
