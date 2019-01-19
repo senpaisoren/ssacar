@@ -15,6 +15,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 # Use Devise
 gem 'devise'
+# Use Bootstrap
+gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
