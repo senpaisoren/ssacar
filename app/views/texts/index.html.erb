@@ -2,17 +2,19 @@
   <div class="centered">
     <h2>
         <%= link_to text.title, text %><br>
-        <small class="author">Submitted <%= time_ago_in_words(text.created_at) %> ago by <%= text.user.name %></small>
+        <small class="author">Submitted <%= time_ago_in_words(text.created_at) %> ago by <%= text.user.name %> with a score of <%= (text.get_upvotes.size - text.get_downvotes.size)%></small>
     </h2>
       <%= link_to like_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
       <span class="glyphicon glyphicon-chevron-up"></span>
-      Upvote
+      Upvote (
       <%= text.get_upvotes.size %>
+      )
       <% end %>
       <%= link_to dislike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
       <span class="glyphicon glyphicon-chevron-down"></span>
-      Downvote
+      Downvote (
       <%= text.get_downvotes.size %>
+      )
        <% end %>
   </div>
   <% end %>

@@ -6,3 +6,16 @@
 	font-family: "Tahoma", Geneva, sans-serif;
 	color: DarkSlateGrey;
 }
+.centered .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	color: black;
+	background-color: white;
+	text-align: left;
+	padding: 5px;
+	border-radius: 6px;
+	position: absolute;
+}
+.centered:hover .tooltiptext {
+	visibility: visible;
+}
