@@ -29,6 +29,19 @@ class TextsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  #UNUPVOTE
+  def unlike
+    @text = Text.find(params[:id])
+    @text.unliked_by current_user
+    redirect_back fallback_location: root_path
+  end  
+  #UNDOWNVOTE
+  def undislike
+    @text = Text.find(params[:id])
+    @text.undisliked_by current_user
+    redirect_back fallback_location: root_path
+  end    
+
   #DOWNVOTE
   def downvote
     @text = Text.find(params[:id])
