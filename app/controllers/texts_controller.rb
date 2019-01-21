@@ -5,7 +5,7 @@ class TextsController < ApplicationController
   # GET /texts
   # GET /texts.json
   def index
-    @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+10) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
+    @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
   end
 
   # GET /texts/1

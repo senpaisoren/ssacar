@@ -9,9 +9,19 @@
 .centeredposts {
 	margin-right:auto;
 	width:60%;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	font-family: "Tahoma", Geneva, sans-serif;
 	color: DarkSlateGrey;
+}
+.centeredposts a:link {
+	color: #5400CD;
+}
+.centeredposts a:visited {
+	color: #3C0093;
+}
+.centeredposts a:hover {
+	text-decoration:underline;
+	color: #320054;
 }
 .centered .tooltiptext {
 	visibility: hidden;
@@ -42,9 +52,5 @@
 }
 
 .col-md-12 center-block {
-	padding-left: 0px;
-}
-
-.container {
 	padding-left: 0px;
 }
