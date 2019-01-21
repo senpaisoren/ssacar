@@ -5,7 +5,7 @@ class TextsController < ApplicationController
   # GET /texts
   # GET /texts.json
   def index
-    @texts = Text.all.sort_by {|obj| (((obj.get_upvotes.size - obj.get_downvotes.size) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
+    @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+10) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
   end
 
   # GET /texts/1
@@ -84,7 +84,7 @@ class TextsController < ApplicationController
   def destroy
     @text.destroy
     respond_to do |format|
-      format.html { redirect_to texts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to texts_url, notice: 'Post was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -97,6 +97,6 @@ class TextsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def text_params
-      params.require(:text).permit(:title)
+      params.require(:text).permit(:title, :content)
     end
 end

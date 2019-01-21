@@ -2,7 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .centered {
-	padding-bottom: 30px;
+	padding-bottom: 10px;
+	font-family: "Tahoma", Geneva, sans-serif;
+	color: DarkSlateGrey;
+}
+.centeredposts {
+	margin-right:auto;
+	width:60%;
+	padding-bottom: 20px;
 	font-family: "Tahoma", Geneva, sans-serif;
 	color: DarkSlateGrey;
 }
@@ -18,4 +25,26 @@
 }
 .centered:hover .tooltiptext {
 	visibility: visible;
+}
+
+.postcontent {
+	height:200px;
+	width:60%;
+	border:0.5px solid #ccc;
+	font-family: "Tahoma", Geneva, sans-serif;
+	overflow:auto;
+	overflow-x: hidden;
+	padding-bottom:10px;
+	padding-left:7px;
+	padding-right:7px;
+	padding-top:7px;
+	margin-bottom:5px;
+}
+
+.col-md-12 center-block {
+	padding-left: 0px;
+}
+
+.container {
+	padding-left: 0px;
 }

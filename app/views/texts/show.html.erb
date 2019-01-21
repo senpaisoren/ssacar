@@ -1,6 +1,14 @@
 <div class="centered">
- <h1><%= @text.title %></a><br> <small>Submitted by <%= @text.user.name %> <%= time_ago_in_words(@text.created_at) %> ago.</small></h1>
+ <h1><%= @text.title %></a><br>
+  <small>Submitted by <%= @text.user.name %> <%= time_ago_in_words(@text.created_at) %> ago.</small>
+</h1>
 </div>
+
+<div class="postcontent">
+	<h4><%= @text.content %>
+	</h4>
+</div>
+
 <% if @text.user == current_user && ((Time.now.to_i - @text.created_at.to_i) < 7200) %>
  <div class="btn-group">
   <%= link_to 'Edit', edit_text_path(@text), class: "btn btn-default" %>

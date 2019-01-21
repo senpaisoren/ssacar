@@ -1,9 +1,9 @@
 <% @texts.each do |text| %>
-  <div class="centered">
-    <h2>
+  <div class="centeredposts">
+    <h3>
         <%= link_to text.title, text %><br>
         <small class="author">Submitted <%= time_ago_in_words(text.created_at) %> ago by <%= text.user.name %> with a score of <%= (text.get_upvotes.size - text.get_downvotes.size)%></small>
-    </h2>
+    </h3>
     <% if text.voted_on_by? current_user %>
 	      <%= link_to unlike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
 	      <span class="glyphicon glyphicon-chevron-up"></span>
