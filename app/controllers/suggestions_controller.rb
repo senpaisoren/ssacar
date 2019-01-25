@@ -1,5 +1,5 @@
-class TextsController < ApplicationController
-  before_action :set_text, only: [:show, :edit, :update, :destroy]
+class SuggestionsController < ApplicationController
+	  before_action :set_text, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /texts
@@ -8,8 +8,6 @@ class TextsController < ApplicationController
     @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
   end
 
-  def suggestions
-  end
   # GET /texts/1
   # GET /texts/1.json
   def show
@@ -17,11 +15,12 @@ class TextsController < ApplicationController
 
   # GET /texts/new
   def new
-    @text = current_user.texts.build
+    redirect_to new_text_path
   end
 
   # GET /texts/1/edit
   def edit
+  	redirect_to edit_text_path 
   end
 
   #UPVOTE
