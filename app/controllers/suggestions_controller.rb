@@ -11,6 +11,7 @@ class SuggestionsController < ApplicationController
   # GET /texts/1
   # GET /texts/1.json
   def show
+  	redirect_to text_path
   end
 
   # GET /texts/new

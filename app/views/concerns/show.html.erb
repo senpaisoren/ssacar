@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @concern.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @concern.content %>
+</p>
+
+<p>
+  <strong>Texttype:</strong>
+  <%= @concern.texttype %>
+</p>
+
+<%= link_to 'Edit', edit_concern_path(@concern) %> |
+<%= link_to 'Back', concerns_path %>

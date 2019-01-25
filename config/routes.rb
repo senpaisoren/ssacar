@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :concerns
   devise_for :users
   resources :texts do
   	member do
