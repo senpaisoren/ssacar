@@ -1,15 +1,27 @@
+<%= form_with(model: text, local: true) do |form| %>
+  <% if text.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(text.errors.count, "error") %> prohibited this text from being saved:</h2>
 
-<%= simple_form_for(@concern) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <ul>
+      <% text.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :content %>
-    <%= f.input :texttype %>
+<div class="form-group">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+<div class="form-group">
+    <%= form.label  :Text %><br>
+    <%= form.text_field :content, class: "form-control" %>
+  </div>  
+  <br>
+  <div class="actions">
+    <%= form.submit "Submit", class: "btn btn-kg btn-primary" %>
   </div>
 <% end %>

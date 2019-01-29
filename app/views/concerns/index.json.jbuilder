@@ -1,1 +1,1 @@
-json.array! @concerns, partial: 'concerns/concern', as: :concern
+json.array! @texts, partial: 'texts/text', as: :text

@@ -1,31 +1,45 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Concerns</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Texttype</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @concerns.each do |concern| %>
-      <tr>
-        <td><%= concern.title %></td>
-        <td><%= concern.content %></td>
-        <td><%= concern.texttype %></td>
-        <td><%= link_to 'Show', concern %></td>
-        <td><%= link_to 'Edit', edit_concern_path(concern) %></td>
-        <td><%= link_to 'Destroy', concern, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% @texts.each do |text| %>
+	<% if text.texttype == 'Concern' %>
+    	<% if !text.content.include? 'banned' %>
+  			<div class="centeredposts">
+  					<h3><%= link_to text.title, text %><br>
+        				<small class="author">Submitted <%= time_ago_in_words(text.created_at) %> ago by <%= text.user.name %> with a score of <%= (text.get_upvotes.size - text.get_downvotes.size)%></small>
+    				</h3>
+    		<% if current_user.present? %>
+	    		<% if text.voted_on_by? current_user %>
+			      <%= link_to unlike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+			      <span class="glyphicon glyphicon-minus"></span>
+			      Remove Vote
+			      <% end %>
+			      <%= link_to like_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+			      <span class="glyphicon glyphicon-chevron-up"></span>
+			      Upvote (
+			      <%= text.get_upvotes.size %>
+			      )
+			      <% end %>
+			      <%= link_to dislike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+			      <span class="glyphicon glyphicon-chevron-down"></span>
+			      Downvote (
+			      <%= text.get_downvotes.size %>
+			      )
+			      <% end %>
+		 		<% end %>
+				<% if !(text.voted_on_by? current_user) %>   
+			      <%= link_to like_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+			      <span class="glyphicon glyphicon-chevron-up"></span>
+			      Upvote (
+			      <%= text.get_upvotes.size %>
+			      )
+			      <% end %>
+			      <%= link_to dislike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+			      <span class="glyphicon glyphicon-chevron-down"></span>
+			      Downvote (
+			      <%= text.get_downvotes.size %>
+			      )
+			      <% end %>
+			    <% end %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Concern', new_concern_path %>
+    <% end %>
+    <% end %>
+  </div>
+  <% end %>
