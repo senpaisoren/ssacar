@@ -1,3 +1,9 @@
+<% if @text.content.include? '@@bannedArray' %>
+	<div class="centered">
+		<h4> This post was not shown publicly for containing a banned word </h4>
+	</div>
+<% end %>
+
 <div class="centered">
  <h1><%= @text.title %></a><br>
   <small>Submitted by <%= @text.user.name %> <%= time_ago_in_words(@text.created_at) %> ago.</small>

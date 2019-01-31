@@ -1,0 +1,1 @@
+@@bannedArray = ['banned', 'array']
