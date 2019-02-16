@@ -26,6 +26,7 @@
  padding: 15px 0;
  a {
   color: #2F363E;
+  background-color: transparent;
  }
 }
 
@@ -60,4 +61,12 @@ a {
 
 .container {
   padding-left: 0px;
+}
+
+.centeredposts {
+  margin-left: 7.5%;
+  width: 60%;
+  padding-bottom: 10px;
+  font-family: "Tahoma", Geneva, sans-serif;
+  color: DarkSlateGrey;
 }
