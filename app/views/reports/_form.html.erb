@@ -1,0 +1,38 @@
+<div class="total" style="margin-left:7.5%">
+<%= form_with(model: text, local: true) do |form| %>
+  <% if text.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(text.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% text.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="form-group">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+<div class="form-group">
+    <%= form.label  :Text %><br>
+    <%= form.text_field :content, class: "form-control" %>
+  </div>  
+
+<div class="form-group">
+    <%= form.radio_button :texttype, 'Suggestion' %>
+    <%= form.label  :texttype, "This is a suggestion" %> <br>
+    <%= form.radio_button :texttype, 'Concern' %>
+    <%= form.label  :texttype, "This is a concern" %> <br>
+    <%= form.radio_button :texttype, 'Recommendation' %>
+    <%= form.label  :texttype, "This is a recommendation" %> <br>
+  </div>   
+  <br>
+
+  <div class="actions">
+    <%= form.submit "Submit", class: "btn btn-kg btn-primary" %>
+  </div>
+<% end %>

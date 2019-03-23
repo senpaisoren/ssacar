@@ -1,6 +1,8 @@
 <% @texts.each do |text| %>
-	<% if text.texttype == 'Concern' %>
-    	<% if !(text.content.split(" ") & $bannedArray).present? %>
+		<% if text.texttype == 'Concern' %>
+    	<% if (text.content.split(" ") & $bannedArray).present? %>
+    	<% text.update_attribute(:reported, "True") %>
+    	<% else %>
   			<div class="centeredposts">
   					<h3><%= link_to text.title, text %><br>
         				<small class="author">Submitted <%= time_ago_in_words(text.created_at) %> ago by <%= text.user.name %> with a score of <%= (text.get_upvotes.size - text.get_downvotes.size)%></small>

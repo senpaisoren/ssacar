@@ -1,16 +1,12 @@
 <div class="total" style="margin-left:7.5%">
 <div class="centered">
  <h1><%= @text.title %></a><br>
-  <small>Submitted by <%= @text.user.name %> <%= time_ago_in_words(@text.created_at) %> ago. </small>
+  <small>Submitted by <%= @text.user.name %> <%= time_ago_in_words(@text.created_at) %> ago. <%= @text.reported %> </small>
 </h1>
 </div>
 
 <% if @text.reported == true %>
-<h4> [This post has been reported by a member of the community or otherwise flagged for inappropriate content] </h4>
-<% end %>
-
-<% if @text.reported == false %>
-<h4> [This post was previously reported, but has been marked safe by a staff member] </h4>
+<h4> REPORTED </h4>
 <% end %>
 
 <div class="postcontent">
@@ -28,24 +24,12 @@
   <%= link_to 'Delete', @text, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
  </div>
 <% end %>
-
-<% if (@text.reported == nil) %>
 <div class="btn-group">
 	<%= link_to report_text_path(@text), method: :put, class: "btn btn-default" do %>
 	<span class="glyphicon glyphicon-flag"></span>
 	Report
 	<% end %>
 </div>
-<% end %>
-
-<% if (@text.reported == true) %>
-<div class="btn-group">
-	<%= link_to unreport_text_path(@text), method: :put, class: "btn btn-default" do %>
-	<span class="glyphicon glyphicon-ok-circle"></span>
-	Mark as Safe
-	<% end %>
-</div>
-<% end %>
 
 
 <% if current_user.present? %>

@@ -1,4 +1,4 @@
-class TextsController < ApplicationController
+class ReportsController < ApplicationController
   before_action :set_text, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -13,28 +13,11 @@ class TextsController < ApplicationController
   def show
   end
 
-# Marks post as reported and removes it from list; /reports
   def report
-  	@text = Text.find(params[:id])
-  	@text.update_attribute(:reported, true)
-  	redirect_back fallback_location: root_path
-  end
-
-  def unreport
-  	@text = Text.find(params[:id])
-  	@text.update_attribute(:reported, false)
-  	redirect_back fallback_location: root_path
-  end
-
-  def resolve
-  	@text = Text.find(params[:id])
-  	@text.update_attribute(:resolved, true)
-  	redirect_back fallback_location: root_path
-  end
-  
-
-
-
+    @text = Text.find(params[:id])
+    @text.update_attribute(:reported, "True")
+    redirect_back fallback_location: root_path
+end
   # GET /texts/new
   def new
     @text = current_user.texts.build
