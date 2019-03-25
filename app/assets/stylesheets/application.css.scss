@@ -21,7 +21,6 @@
 #logo {
  font-size: 26px;
  font-weight: 700;
- text-transform: uppercase;
  letter-spacing: -1px;
  padding: 15px 0;
  a {
@@ -45,18 +44,6 @@ a {
    }
   }
  }
- .comments_title {
-  margin-top: 2em;
- }
- #comments {
-  .comment {
-   padding: 1em 0;
-   border-top: 1px solid #E9E9E9;
-   .lead {
-    margin-bottom: 0;
-   }
-  }
- }
 }
 
 .navbar-default {
@@ -65,14 +52,13 @@ a {
   a {
   color: #F8F8FF;
   }
+  a:hover {
+  color: #F8F8FF;
+  text-decoration: underline;
+  }
   }
 }
   background-color: #000080;
-}
-
-
-.container {
-  padding-left: 0px;
 }
 
 .centeredposts {
@@ -81,4 +67,8 @@ a {
   padding-bottom: 10px;
   font-family: "Tahoma", Geneva, sans-serif;
   color: DarkSlateGrey;
+}
+
+.author {
+  color:DarkSlateGrey;
 }

@@ -5,10 +5,6 @@
 </h1>
 </div>
 
-<% if @text.resolved == true %>
-<h4> [This post has been marked as addressed or resolved by a staff member] </h4>
-<% end %>
-
 <% if @text.reported == true %>
 <h4> [This post has been reported by a member of the community or auto-flagged for inappropriate content] </h4>
 <% end %>
@@ -34,34 +30,25 @@
  </div>
 <% end %>
 
+<% if (@text.reported == nil) %>
+<div class="btn-group">
+	<%= link_to report_text_path(@text), method: :put, class: "btn btn-default" do %>
+	<span class="glyphicon glyphicon-flag"></span>
+	Report
+	<% end %>
+</div>
+<% end %>
+
+<% if (@text.reported == true) %>
+<div class="btn-group">
+	<%= link_to unreport_text_path(@text), method: :put, class: "btn btn-default" do %>
+	<span class="glyphicon glyphicon-ok-circle"></span>
+	Mark as Safe
+	<% end %>
+</div>
+<% end %>
+
 <% if current_user.present? %>
-	<% if (@text.resolved == nil) && (current_user == User.second) %>
-		<div class="btn-group">
-			<%= link_to resolve_text_path(@text), method: :put, class: "btn btn-default" do %>
-				<span class="glyphicon glyphicon-check"></span>
-				Resolve
-			<% end %>
-		</div>
-	<% end %>
-
-	<% if (@text.reported == nil) %>
-		<div class="btn-group">
-			<%= link_to report_text_path(@text), method: :put, class: "btn btn-default" do %>
-				<span class="glyphicon glyphicon-flag"></span>
-				Report
-			<% end %>
-		</div>
-	<% end %>
-
-	<% if (@text.reported == true) %>
-		<div class="btn-group">
-			<%= link_to unreport_text_path(@text), method: :put, class: "btn btn-default" do %>
-				<span class="glyphicon glyphicon-ok-circle"></span>
-				Mark as Safe
-			<% end %>
-		</div>
-	<% end %>
-	
 	<% if (@text.voted_on_by? current_user) %>
 		<%= link_to unlike_text_path(@text), method: :put, class: "btn btn-default btn-sm" do %>
 			<span class="glyphicon glyphicon-minus"></span>
@@ -93,6 +80,13 @@
 	      Downvote (
 	      <%= @text.get_downvotes.size %>
 	      )
+	    <% end %>
+	<% end %>
+
+	<% if (@text.resolved == nil) && (current_user == User.second) %>
+		<%= link_to resolve_text_path(@text), method: :put, class: "btn btn-default btn-sm" do %>
+		<span class="glyphicon glyphicon-check"></span>
+	    Resolve
 	    <% end %>
 	<% end %>
 <% end %>

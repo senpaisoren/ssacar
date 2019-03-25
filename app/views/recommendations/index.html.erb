@@ -1,47 +1,47 @@
 <% @texts.each do |text| %>
-	<% if text.texttype == 'Recommendation' %>
     	<% if (text.content.split(" ") & $bannedArray).present? %>
     	<% text.update_attribute(:reported, "True") %>
     	<% else %>
-  			<div class="centeredposts">
-  					<h3><%= link_to text.title, text %><br>
-        				<small class="author">Submitted <%= time_ago_in_words(text.created_at) %> ago by <%= text.user.name %> with a score of <%= (text.get_upvotes.size - text.get_downvotes.size)%></small>
-    				</h3>
-    		<% if current_user.present? %>
-	    		<% if text.voted_on_by? current_user %>
-			      <%= link_to unlike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
-			      <span class="glyphicon glyphicon-minus"></span>
-			      Remove Vote
-			      <% end %>
-			      <%= link_to like_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
-			      <span class="glyphicon glyphicon-chevron-up"></span>
-			      Upvote (
-			      <%= text.get_upvotes.size %>
-			      )
-			      <% end %>
-			      <%= link_to dislike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
-			      <span class="glyphicon glyphicon-chevron-down"></span>
-			      Downvote (
-			      <%= text.get_downvotes.size %>
-			      )
-			      <% end %>
-		 		<% end %>
-				<% if !(text.voted_on_by? current_user) %>   
-			      <%= link_to like_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
-			      <span class="glyphicon glyphicon-chevron-up"></span>
-			      Upvote (
-			      <%= text.get_upvotes.size %>
-			      )
-			      <% end %>
-			      <%= link_to dislike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
-			      <span class="glyphicon glyphicon-chevron-down"></span>
-			      Downvote (
-			      <%= text.get_downvotes.size %>
-			      )
-			      <% end %>
-			    <% end %>
-    <% end %>
-    <% end %>
-    <% end %>
-  </div>
-  <% end %>
+	    	<% if (text.resolved != true) && (text.reported != true) && (text.texttype == 'Recommendation') %>
+	  			<div class="centeredposts">
+	  					<h3><%= link_to text.title, text %><br>
+	        				<small class="author">Submitted <%= time_ago_in_words(text.created_at) %> ago by <%= text.user.name %> with a score of <%= (text.get_upvotes.size - text.get_downvotes.size)%></small>
+	    				</h3>
+	    		<% if current_user.present? %>
+					<% if (text.voted_on_by? current_user) %>
+						<%= link_to unlike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+							<span class="glyphicon glyphicon-minus"></span>
+						    Remove Vote
+						<% end %>
+						<%= link_to like_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+							<span class="glyphicon glyphicon-chevron-up"></span>
+						    Upvote (
+						    <%= text.get_upvotes.size %>
+						    )
+						<% end %>
+						<%= link_to dislike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						    Downvote (
+						    <%= text.get_downvotes.size %>
+						    )
+						<% end %>
+					<% end %>
+					<% if !(text.voted_on_by? current_user) %>   
+						<%= link_to like_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+					      <span class="glyphicon glyphicon-chevron-up"></span>
+					      Upvote (
+					      <%= text.get_upvotes.size %>
+					      )
+					    <% end %>
+					    <%= link_to dislike_text_path(text), method: :put, class: "btn btn-default btn-sm" do %>
+					      <span class="glyphicon glyphicon-chevron-down"></span>
+					      Downvote (
+					      <%= text.get_downvotes.size %>
+					      )
+					    <% end %>
+					<% end %>
+				<% end %>
+	    	<% end %>
+	    <% end %>	
+    </div>
+<% end %>

@@ -1,5 +1,5 @@
-class TextsController < ApplicationController
-  before_action :set_text, only: [:show, :edit, :update, :destroy]
+class ResolutionsController < ApplicationController
+    before_action :set_text, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /texts
@@ -11,37 +11,17 @@ class TextsController < ApplicationController
   # GET /texts/1
   # GET /texts/1.json
   def show
+    redirect_to text_path
   end
-
-# Marks post as reported and removes it from list; /reports
-  def report
-  	@text = Text.find(params[:id])
-  	@text.update_attribute(:reported, true)
-  	redirect_back fallback_location: root_path
-  end
-
-  def unreport
-  	@text = Text.find(params[:id])
-  	@text.update_attribute(:reported, false)
-  	redirect_back fallback_location: root_path
-  end
-
-  def resolve
-  	@text = Text.find(params[:id])
-  	@text.update_attribute(:resolved, true)
-  	redirect_back fallback_location: root_path
-  end
-  
-
-
 
   # GET /texts/new
   def new
-    @text = current_user.texts.build
+    redirect_to new_text_path
   end
 
   # GET /texts/1/edit
   def edit
+    redirect_to edit_text_path 
   end
 
   #UPVOTE
@@ -119,6 +99,6 @@ class TextsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def text_params
-      params.require(:text).permit(:title, :content, :texttype, :reported, :resolved)
+      params.require(:text).permit(:title, :content, :texttype)
     end
 end
