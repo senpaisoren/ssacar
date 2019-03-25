@@ -14,9 +14,9 @@ gem 'sass-rails', '~> 5.0'
 # Use Simple Forms
 gem 'simple_form'
 # Use Devise
-gem 'devise'
+gem 'devise', '>= 4.6.0'
 # Use Bootstrap
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '>= 3.4.1'
 # Use Votable
 gem 'acts_as_votable'
 # Use Uglifier as compressor for JavaScript assets
