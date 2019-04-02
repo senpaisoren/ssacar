@@ -14,6 +14,7 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <% if user_signed_in? -%>
             <ul class="nav navbar-nav navbar-right">
+              <li><form class="searchbox"><input type="text" name="searchterm" placeholder="Search"></form></li>
               <li><%= link_to 'Concerns', concerns_path %></li>
               <li><%= link_to 'Suggestions', suggestions_path %></li>
               <li><%= link_to 'Recommendations', recommendations_path %></li>
