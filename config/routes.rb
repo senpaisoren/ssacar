@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       put "resolve", to: "texts#resolve"
   	end
   end
+
+ # get 'login', to: 'logins#new'
+ # get 'login/create', to: 'logins#create', as: :create_login
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :suggestions do
     get '/suggestions' => 'suggestions#index'

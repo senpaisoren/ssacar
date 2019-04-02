@@ -3,10 +3,23 @@ class TextsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /texts
-  # GET /texts.json
-  def index
-    @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
-  end
+  # GET /texts.json\
+
+    def index
+      which_texts = params[:s]
+      if which_texts == nil
+        @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
+      end
+      if which_texts == 'top'
+        @texts = Text.all.sort_by {|obj| ((obj.get_upvotes.size - obj.get_downvotes.size)+1)}.reverse
+      end
+      if which_texts == 'hot'
+        @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
+      end
+      if which_texts == 'new'
+        @texts = Text.all.sort_by {|obj| (Time.now.to_i - obj.created_at.to_i)}
+      end
+    end
 
   # GET /texts/1
   # GET /texts/1.json
@@ -119,6 +132,6 @@ class TextsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def text_params
-      params.require(:text).permit(:title, :content, :texttype, :reported, :resolved)
+      params.require(:text).permit(:title, :content, :s)
     end
 end

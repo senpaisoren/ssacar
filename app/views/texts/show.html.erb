@@ -21,17 +21,18 @@
 	<h4><%= @text.content %>
 	</h4>
 </div>
+<% if (current_user.present?) %>
+	<% if ((@text.user == current_user) and ((Time.now.to_i - @text.created_at.to_i) < 7200) and (@text.reported == nil)) or (current_user.rank == 1) %>
+		<div class="btn-group">
+	  		<%= link_to 'Edit', edit_text_path(@text), class: "btn btn-default" %>
+	 	</div>
+	<% end %>
 
-<% if (@text.user == current_user) and ((Time.now.to_i - @text.created_at.to_i) < 7200) and (@text.reported == nil) or (current_user.rank == 1) %>
-	<div class="btn-group">
-  		<%= link_to 'Edit', edit_text_path(@text), class: "btn btn-default" %>
- 	</div>
-<% end %>
-
-<% if (@text.user == current_user) or (current_user.rank == 1) %>
- <div class="btn-group">
-  <%= link_to 'Delete', @text, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
- </div>
+	<% if (@text.user == current_user) or (current_user.rank == 1) %>
+		 <div class="btn-group">
+		  <%= link_to 'Delete', @text, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+		 </div>
+	<% end %>
 <% end %>
 
 <% if current_user.present? %>
