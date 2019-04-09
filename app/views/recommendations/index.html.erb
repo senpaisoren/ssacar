@@ -1,6 +1,11 @@
+<h3 class="sorting">Sort by: <%= link_to 'Top', root_path(:s => 'top') %>, <%= link_to 'Hot', root_path(:s => 'hot') %>, <%= link_to 'New', root_path(:s => 'new') %></h3>
+ <% profanity_filter = LanguageFilter::Filter.new matchlist: :profanity, creative_letters: true %>
+ <% sex_filter = LanguageFilter::Filter.new matchlist: :sex, creative_letters: true %>
+ <% hate_filter = LanguageFilter::Filter.new matchlist: :hate, creative_letters: true %>
+
 <% @texts.each do |text| %>
-    	<% if (text.content.split(" ") & $bannedArray).present? %>
-    	<% text.update_attribute(:reported, "True") %>
+    	<% if profanity_filter.match?(text.content) or sex_filter.match?(text.content) or hate_filter.match?(text.content) %>
+    	<% text.update_attribute(:reported, true) %>
     	<% else %>
 	    	<% if (text.resolved != true) && (text.reported != true) && (text.texttype == 'Recommendation') %>
 	  			<div class="centeredposts">

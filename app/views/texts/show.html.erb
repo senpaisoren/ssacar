@@ -4,6 +4,13 @@
 	<small>Submitted by <%= @text.user.name %> <%= time_ago_in_words(@text.created_at) %> ago. </small>
 </h1>
 </div>
+ <% profanity_filter = LanguageFilter::Filter.new matchlist: :profanity, creative_letters: true %>
+ <% sex_filter = LanguageFilter::Filter.new matchlist: :sex, creative_letters: true %>
+ <% hate_filter = LanguageFilter::Filter.new matchlist: :hate, creative_letters: true %>
+ 
+<% if profanity_filter.match?(@text.content) or sex_filter.match?(@text.content) or hate_filter.match?(@text.content) %>
+    <% @text.update_attribute(:reported, true) %>
+<% end %>
 
 <% if @text.resolved == true %>
 <h4> [This post has been marked as addressed or resolved by a staff member] </h4>

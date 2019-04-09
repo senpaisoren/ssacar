@@ -5,7 +5,23 @@ class ReportsController < ApplicationController
   # GET /texts
   # GET /texts.json
   def index
-    @texts = Text.all.sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
+    which_texts = params[:s]
+    texts_search = params[:searchterm]
+    if which_texts == nil
+      @texts = Text.where("reported = '1'").sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
+    end
+    if which_texts == 'top'
+      @texts = Text.where("reported = '1'").sort_by {|obj| ((obj.get_upvotes.size - obj.get_downvotes.size)+1)}.reverse
+    end
+    if which_texts == 'hot'
+      @texts = Text.where("reported = '1'").sort_by {|obj| ((((obj.get_upvotes.size - obj.get_downvotes.size)+1) * 10000000000000000000) / (Time.now.to_i - obj.created_at.to_i)) }.reverse
+    end
+    if which_texts == 'new'
+      @texts = Text.where("reported = '1'").sort_by {|obj| (Time.now.to_i - obj.created_at.to_i)}
+    end
+    if texts_search != nil
+      @texts = Text.where("title LIKE ? OR content LIKE ? AND reported IS ?", "%#{texts_search}%", "%#{texts_search}%", "1")
+    end
   end
 
   # GET /texts/1

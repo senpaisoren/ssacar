@@ -19,6 +19,7 @@
 @import "bootstrap";
 
 #logo {
+ font-family: 'Montserrat', sans-serif;
  font-size: 26px;
  font-weight: 700;
  letter-spacing: -1px;
@@ -47,10 +48,13 @@ a {
 }
 
 .navbar-default {
+border: 0px;
 .navbar-nav {
   li {
   a {
   color: #F8F8FF;
+  font-family: 'Lora', serif;
+  font-transform: uppercase;
   }
   a:hover {
   color: #F8F8FF;
@@ -58,8 +62,13 @@ a {
   }
   }
 }
-  background-color: #000080;
+  background-color: #003f72;
 }
+
+.btn-me {
+  background-color: #003f72;
+}
+
 
 .centeredposts {
   margin-left: 7.5%;
@@ -74,11 +83,18 @@ a {
 }
 
 .sorting {
+ font-family: 'Montserrat', sans-serif;
 background-color: #FFFFFF;
+color: #1F1F22;
 margin-left: 7.5%;
   a:hover {
     text-decoration: underline;
     background-color: transparent;
+    color: #003F72;
+  }
+  a:visited {
+  background-color: transparent;
+  color: #003F72;
   }
 }
 

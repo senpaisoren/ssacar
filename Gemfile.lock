@@ -108,6 +108,7 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jwt (2.1.0)
+    language_filter (0.3.01)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -240,6 +241,7 @@ DEPENDENCIES
   duktape
   google_sign_in
   jbuilder (~> 2.5)
+  language_filter
   puma (~> 3.11)
   rails (~> 5.2.2)
   sass-rails (~> 5.0)
