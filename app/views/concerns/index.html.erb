@@ -4,9 +4,13 @@
  <% hate_filter = LanguageFilter::Filter.new matchlist: :hate, creative_letters: true %>
 
 <% @texts.each do |text| %>
-    	<% if profanity_filter.match?(text.content) or sex_filter.match?(text.content) or hate_filter.match?(text.content) %>
-    	<% text.update_attribute(:reported, true) %>
-    	<% else %>
+    	<% if (text.checked == nil) %>
+    		<% if profanity_filter.match?(text.content) or sex_filter.match?(text.content) or hate_filter.match?(text.content) %>
+    			<% text.update_attribute(:reported, true) %>
+    		<% else %>
+    			<% text.update_attribute(:checked, true) %>
+    		<% end %>
+    	<% end %>
 	    	<% if (text.resolved != true) && (text.reported != true) && (text.texttype == 'Concern') %>
 	  			<div class="centeredposts">
 	  					<h3><%= link_to text.title, text %><br>
@@ -46,7 +50,6 @@
 					    <% end %>
 					<% end %>
 				<% end %>
-	    	<% end %>
 	    <% end %>	
     </div>
 <% end %>

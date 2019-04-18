@@ -27,6 +27,17 @@ class ReportsController < ApplicationController
   # GET /texts/1
   # GET /texts/1.json
   def show
+    redirect_to text_path
+  end
+
+  # GET /texts/new
+  def new
+    redirect_to new_text_path
+  end
+
+  # GET /texts/1/edit
+  def edit
+    redirect_to edit_text_path 
   end
 
   def report
@@ -35,14 +46,6 @@ class ReportsController < ApplicationController
     redirect_back fallback_location: root_path
 end
   # GET /texts/new
-  def new
-    @text = current_user.texts.build
-  end
-
-  # GET /texts/1/edit
-  def edit
-  end
-
   #UPVOTE
   def upvote
     @text = Text.find(params[:id])

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_190552) do
+ActiveRecord::Schema.define(version: 2019_04_17_231840) do
 
   create_table "concerns", force: :cascade do |t|
     t.string "title"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_04_01_190552) do
     t.string "texttype"
     t.boolean "reported"
     t.boolean "resolved"
+    t.boolean "checked"
     t.index ["user_id"], name: "index_texts_on_user_id"
   end
 
